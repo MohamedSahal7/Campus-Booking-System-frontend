@@ -25,6 +25,28 @@ const Login = () => {
   };
 
   const handleSubmit = async (event) => {
+  event.preventDefault();
+
+  setError("");
+  setLoading(true);
+
+  try {
+    const response = await login(formData);
+
+    if (response.user.role === "admin") {
+      navigate("/admin/dashboard");
+    } else {
+      navigate("/dashboard");
+    }
+  } catch (err) {
+    setError(
+      err.response?.data?.message ||
+      "Invalid email or password."
+    );
+  } finally {
+    setLoading(false);
+  }
+};
     event.preventDefault();
 
     setError("");
