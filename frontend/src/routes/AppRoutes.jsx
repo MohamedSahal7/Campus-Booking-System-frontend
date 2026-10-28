@@ -21,6 +21,10 @@ import ManageFacilities from "../pages/admin/ManageFacilities";
 import ManageSchedules from "../pages/admin/ManageSchedules";
 import Reports from "../pages/admin/Reports";
 import Settings from "../pages/admin/Settings";
+import ProtectedRoute from "../components/ProtectedRoute";
+import Login from "../pages/Login";
+import Register from "../pages/Register";
+import Profile from "../pages/user/Profile";
 
 const AppRoutes = () => {
   return (
@@ -55,6 +59,22 @@ const AppRoutes = () => {
 
       {/* 404 */}
       <Route path="*" element={<Navigate to="/login" replace />} />
+      {/* Redirect root to login */}
+      <Route
+        path="/"
+        element={<Navigate to="/login" replace />}
+      />
+
+      {/* Public Routes */}
+      <Route
+        path="/login"
+        element={<Login />}
+      />
+
+      <Route
+        path="/register"
+        element={<Register />}
+      />
     </Routes>
   );
 };

@@ -4,6 +4,10 @@ const api = axios.create({
   baseURL:
     import.meta.env.VITE_API_URL ||
     "https://campus-booking-system-backend.onrender.com/api",
+  baseURL: "http://127.0.0.1:5000/api",
+  baseURL:
+    import.meta.env.VITE_API_URL ||
+    "http://127.0.0.1:5000/api",
   headers: {
     "Content-Type": "application/json",
   },
@@ -17,6 +21,13 @@ api.interceptors.request.use(
       config.headers.Authorization = `Bearer ${token}`;
     }
 
+// Attach JWT to every authenticated request
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("access_token");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
     return config;
   },
   (error) => Promise.reject(error)

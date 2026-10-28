@@ -1,4 +1,11 @@
 import { createContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+
 import AuthService from "../services/auth";
 
 const AuthContext = createContext(null);
@@ -9,6 +16,7 @@ export function AuthProvider({ children }) {
     return savedUser ? JSON.parse(savedUser) : null;
   });
 
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -38,6 +46,8 @@ export function AuthProvider({ children }) {
       localStorage.removeItem("access_token");
       localStorage.removeItem("user");
 
+    } catch (error) {
+      localStorage.removeItem("access_token");
       setUser(null);
     } finally {
       setLoading(false);

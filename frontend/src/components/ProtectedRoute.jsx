@@ -5,6 +5,8 @@ import useAuth from "../hooks/useAuth";
 
 const ProtectedRoute = ({ requiredRole }) => {
   const { loading, isAuthenticated, user } = useAuth();
+const ProtectedRoute = () => {
+  const { loading, isAuthenticated } = useAuth();
 
   if (loading) {
     return <Loader />;

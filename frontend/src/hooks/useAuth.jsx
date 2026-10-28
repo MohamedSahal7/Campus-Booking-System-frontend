@@ -14,4 +14,7 @@ const useAuth = () => {
 };
 
 export { useAuth };
+  return context;
+};
+
 export default useAuth;

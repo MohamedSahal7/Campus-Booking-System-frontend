@@ -47,6 +47,23 @@ const Login = () => {
     setLoading(false);
   }
 };
+    event.preventDefault();
+
+    setError("");
+    setLoading(true);
+
+    try {
+      await login(formData);
+      navigate("/dashboard");
+    } catch (err) {
+      setError(
+        err.response?.data?.message ||
+        "Invalid email or password."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#F8FAFC] px-4">
